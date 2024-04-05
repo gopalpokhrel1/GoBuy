@@ -10,8 +10,8 @@ const initialState = {
 // Get all Products  -> ProductList.js
 export const fetchAllProductsAsync = createAsyncThunk(  
   'product/fetchAllProducts',
-  async () => {
-    const response = await fetchAllProducts();
+  async (token) => {
+    const response = await fetchAllProducts(token);
     return response.data;
 
 
@@ -29,8 +29,8 @@ export const selectedProductsAsync = createAsyncThunk(
 );
 export const fetchProductsByqueryAsync = createAsyncThunk(
   'product/fetchProductsByquery',
-  async ({filter,sort,pagination}) => {
-    const response = await fetchProductsByquery(filter,sort, pagination);
+  async ({filter,sort,pagination, token}) => {
+    const response = await fetchProductsByquery(filter,sort, pagination, token);
     return response.data;
 
 

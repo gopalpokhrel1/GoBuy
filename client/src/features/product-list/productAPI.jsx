@@ -1,7 +1,13 @@
  // Get all Products
- export  function fetchAllProducts() {
+ export  function fetchAllProducts(token) {
+  console.log(token)
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/products')
+     const response = await fetch('http://localhost:8080/products', {
+      method:"GET",
+      headers:{
+        "Authorization":`Bearer ${token}`,
+      }
+     })
      const data = await response.json();
      resolve({data})
     }
@@ -55,7 +61,7 @@
   }
   
   
-  export  function fetchProductsByquery(filter,sort, pagination) {
+  export  function fetchProductsByquery(filter,sort, pagination, token) {
     
   
     let queryString = '';
@@ -81,7 +87,12 @@
     }
   
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/products?'+queryString)
+     const response = await fetch('http://localhost:8080/products?'+queryString, {
+      method:"GET",
+      headers:{
+        "Authorization":`Bearer ${token}`,
+      }
+     })
      const data = await response.json();
      resolve({data})
     }

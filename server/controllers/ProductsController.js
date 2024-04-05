@@ -15,8 +15,6 @@ exports.createProducts = (req,res)=>{
 exports.fetchAllProducts = async (req,res)=>{
 
     let query =  Product.find();
-    
-
 
     if (req.query.category) {
         query = query.where('category').equals(req.query.category);

@@ -12,6 +12,7 @@ import {
   fetchProductsByqueryAsync,
   allProducts
 } from '../productSlice';
+import { validUser } from '../../auth/authSlice';
 
 
 
@@ -103,7 +104,10 @@ function classNames(...classes) {
 
 
 export default function ProductList() {
-
+ 
+  const user = useSelector(validUser);
+  const token = user.token;
+  
 
   const dispatch = useDispatch();
 
@@ -160,8 +164,8 @@ export default function ProductList() {
 
 
     const pagination = { _page: page, _limit: limit }
-    dispatch(fetchAllProductsAsync())
-    dispatch(fetchProductsByqueryAsync({ filter, sort, pagination }));
+    dispatch(fetchAllProductsAsync(token))
+    dispatch(fetchProductsByqueryAsync({ filter, sort, pagination,token  }));
   }, [filter, sort, page]);
 
 

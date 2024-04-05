@@ -12,7 +12,7 @@ import {
   fetchAllProductsAsync, 
   fetchProductsByqueryAsync
 } from '../product-list/productSlice';
-
+import { validUser } from '../auth/authSlice';
 
 
 const sortOptions = [
@@ -125,6 +125,9 @@ export default function AdminProductList() {
   const limit = 10;
   const productCount = useSelector(allProducts);
   const totolItems = productCount.length;
+
+  const user = useSelector(validUser);
+  const token = user.token;
  
   const handleFilter = (e, section, option) => {
     const updatedFilter = {...filter};
@@ -165,8 +168,8 @@ export default function AdminProductList() {
   useEffect(()=>{
 
     const pagination = {_page:page, _limit:limit}
-    dispatch(fetchAllProductsAsync());
-    dispatch(fetchProductsByqueryAsync({filter, sort, pagination}));
+    dispatch(fetchAllProductsAsync(token));
+    dispatch(fetchProductsByqueryAsync({filter, sort, pagination, token}));
   },[filter, sort, page]);
 
 
