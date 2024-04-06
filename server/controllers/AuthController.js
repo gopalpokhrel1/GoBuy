@@ -2,6 +2,7 @@ const { User } = require("../models/UserModel");
 const bcrypt = require('bcrypt');
 
 const { generate_jwt } = require("../utils/generateJwt");
+const { sendMail } = require("../utils/sendMailRegister");
 
 exports.createUser = async (req, res) => {
     const salt_round = process.env.SALT_ROUND;
@@ -24,7 +25,7 @@ exports.createUser = async (req, res) => {
         })
 
         await user.save();
-
+        sendMail(email);
         res.status(201).json({ message: "User created successfully" });
     }
 

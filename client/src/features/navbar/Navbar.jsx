@@ -48,7 +48,7 @@ export default function Navbar({ children }) {
                                             <Link to='/'>
                                                 <img
                                                     className="h-8 w-8"
-                                                    src="/logo/main_logo.png"
+                                                    src="...logo"
                                                     alt="GoBuy"
                                                 /></Link>
                                         </div>

@@ -9,10 +9,9 @@ export default function AdminOrder() {
   const [page, setPage] = useState(1);
   const [edit, setEdit] = useState(null);
   const dispatch = useDispatch();
-  
+
 
   const order = useSelector(selectOrder);
-  console.log(order);
 
   const limit = 10;
 
@@ -33,7 +32,9 @@ export default function AdminOrder() {
   
 
       const handleUpdate = (e, order)=>{
-        const data = {status:e.target.value, id:edit};
+        const email =  order[0].selectedAddress.email;
+        const data = {status:e.target.value, id:edit, email:email};
+        
       
         dispatch(updateOrderAsync(data))
         setEdit(null)

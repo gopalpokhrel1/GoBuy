@@ -1,4 +1,6 @@
-const {Order} = require("../models/OrderModel")
+const {Order} = require("../models/OrderModel");
+const { orderMail } = require("../utils/orderMail");
+const { orderStatus } = require("../utils/orderStatusMail");
 
 
 exports.fetchOrder = async(req,res)=>{
@@ -31,10 +33,11 @@ exports.fetchOrder = async(req,res)=>{
 }
 
 exports.createOrder = async(req,res)=>{
+    const data = req.body;
     try{
         const data = await new Order(req.body);
         data.save().then(doc=> res.status(200).json(doc)).catch(err => res.status(500))
-       
+        orderMail(data);     
     }
     catch(error){
 
@@ -42,10 +45,12 @@ exports.createOrder = async(req,res)=>{
 }
 
 exports.updateOrder = async(req,res)=>{
+    const file = req.body;
     const {id} = req.params;
     const data = await Order.findByIdAndUpdate(id, req.body);
   
     res.status(200).json(data);
+    orderStatus(file);
 }
 
 exports.deleteOrder = async(req,res)=>{
