@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import {  useState } from 'react'
 import { useForm } from "react-hook-form"
-import { fetchedLoginUserAsync,  updateAddressAsync } from '../features/user/userSlice';
-import { validUser } from '../features/auth/authSlice';
+import { updateAddressAsync, selectLoginUser, fetchedLoginUserAsync } from '../features/user/userSlice';
+import { userLogin, validUser } from '../features/auth/authSlice';
 
 
 
@@ -27,8 +27,10 @@ export default function Checkout() {
     const data = useSelector(CartById);
     const user = useSelector(validUser);
     const order = useSelector(orderValue);
-
-
+    const loginUser = useSelector(selectLoginUser);
+    const dispatch = useDispatch();
+  
+    console.log(user);
 
 
     const {
@@ -38,7 +40,7 @@ export default function Checkout() {
         formState: { errors },
     } = useForm();
 
-    const dispatch = useDispatch();
+  
     const handleRemoveItem = (id) => {
         dispatch(deleteItemAsync(id))
     }
@@ -53,7 +55,7 @@ export default function Checkout() {
     const [payment, setPayment] = useState('cash');
 
     const handleAddress = (e) => {
-        setSelectedAddress(user.address[e.target.value]);
+        setSelectedAddress(loginUser.address[e.target.value]);
     }
 
     const handlePayment = (e) => {
@@ -61,43 +63,42 @@ export default function Checkout() {
     }
 
     const handleOrder = () => {
-
-        const order = { user:user.id, data, selectedAddress, payment, totalPrice, totalQuantity, status: 'pending' };
-
+        const order = { user:loginUser.id, data, selectedAddress, payment, totalPrice, totalQuantity, status: 'pending' };
         if(order.selectedAddress === null || order.payment === null){
             alert("Select at least one address");
         }
         else{
-           
             dispatch(orderItemAsync(order));
-       
         }
-       
-
-
     }
+    const handleFormSubmit = (formData) => {
+        if(!selectedAddress){
+          alert("Select the address");
+        }
+        else{
+            dispatch(updateAddressAsync({ address: [...loginUser.address, formData], id: user.id }));
+            reset();
+        }
+      
+    };
 
-    useEffect(()=>{
-        dispatch(fetchedLoginUserAsync(user.id))
-    });
+    useEffect(() => {
+        dispatch(fetchedLoginUserAsync(user.id));
+      });
 
- 
     return (
         <>
 
             {!data.length && <Navigate to='/' replace={true} />}
             {order && <Navigate to={`/order-success/${order.id}`} replace={true} />}
+            {loginUser && 
             <div className="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
 
                 <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
                     <div className='lg:col-span-3 '>
                         <form
                             className='bg-white px-4'
-                            onSubmit={handleSubmit((data) => {
-                                 dispatch(updateAddressAsync({ address: [...user.address, data], id: user.id }));
-                                reset();
-                             
-                            })}
+                            onSubmit={handleSubmit(handleFormSubmit)}
                         >
                             <div className="space-y-12">
                                 <div className="border-b border-gray-900/10 pb-12">
@@ -224,7 +225,7 @@ export default function Checkout() {
                                         Choose a Address
                                     </p>
                                     <ul role="list" className="divide-y divide-gray-100">
-                                        {user.address.map((add, index) => (
+                                        {loginUser.address.map((add, index) => (
                                             <li key={add.pincode} className="flex justify-between gap-x-6 py-5">
                                                 <div className="flex min-w-0 gap-x-4">
                                                     <input
@@ -387,7 +388,7 @@ export default function Checkout() {
                     </div>
                 </div>
             </div>
-
-        </>
+}
+        </> 
     )
 }

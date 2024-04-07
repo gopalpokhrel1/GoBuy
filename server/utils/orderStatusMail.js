@@ -2,6 +2,7 @@ const nodemailer = require('nodemailer');
 
 exports.orderStatus = async(data)=>{
     const gmail = data.email;
+    console.log(gmail);
     const status = data.status;
   const transporter = nodemailer.createTransport({
     service:'gmail',

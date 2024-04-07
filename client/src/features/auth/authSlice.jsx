@@ -5,7 +5,6 @@ const initialState = {
   userlogin: null,
   status: 'idle',
   validuser: JSON.parse(localStorage.getItem('user')),
-
   err:null
 };
 
@@ -32,13 +31,6 @@ export const logOutAsync = createAsyncThunk(
   async () => {  
     const response = localStorage.removeItem('user');
     return response;
-  }
-);
-export const addUserCheckoutAsync = createAsyncThunk(
-  'user/userCheckOut',
-  async (value) => {
-    const response = await addUserCheckout(value);
-    return response.data;
   }
 );
 
@@ -81,13 +73,6 @@ export const createUserSlice = createSlice({
       .addCase(userCheckAsync.rejected, (state, action) => {
         state.status = 'idle';
         state.err = action.error;
-      })
-      .addCase(addUserCheckoutAsync.pending, (state, action) => {
-        state.status = 'idle';
-      })
-      .addCase(addUserCheckoutAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.validuser= action.payload;
       });
   },
 });

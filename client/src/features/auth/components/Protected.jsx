@@ -5,7 +5,8 @@ import { Navigate } from "react-router-dom";
 
 export default function Protected({children}) {
 
-    const user = localStorage.getItem('user');
+ const user = useSelector(validUser);
+ 
         if(!user){
             return <Navigate to='/login' replace={true}/>
         }

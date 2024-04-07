@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useForm} from "react-hook-form"
-import { clearState, postProductAsync, selectedProductsAsync, selectSpecificProducts, updateProductAsync } from '../product-list/productSlice';
+import { clearState, deleteProductAsync, postProductAsync, selectedProductsAsync, selectSpecificProducts, updateProductAsync } from '../product-list/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -42,10 +42,7 @@ export default function ProductForm() {
   }, [product, setValue]);
 
   const handleDelete = ()=>{
-    const data = {...product};
-    data.delete = true;
-
-    dispatch(updateProductAsync(data));
+    dispatch(deleteProductAsync(product.id));
   }
 
 
@@ -139,7 +136,7 @@ export default function ProductForm() {
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
                   <input
-                    type="number"
+                    type="text"
                     {...register('discountPercentage')}
                     id="Discount Percentage"
                 

@@ -31,8 +31,8 @@ export default function AdminOrder() {
       }
   
 
-      const handleUpdate = (e, order)=>{
-        const email =  order[0].selectedAddress.email;
+      const handleUpdate = (e, order, index)=>{
+        const email =  order[index].selectedAddress.email;
         const data = {status:e.target.value, id:edit, email:email};
         
       
@@ -59,7 +59,7 @@ export default function AdminOrder() {
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
             {
-            order &&  order.map(item  =>   <tr className="border-b border-gray-200 hover:bg-gray-100">
+            order &&  order.map((item, index) =>   <tr className="border-b border-gray-200 hover:bg-gray-100">
               <td className="py-3 px-6 text-left whitespace-nowrap">
                 <div className="flex items-center">
                   <div className="mr-2">
@@ -101,7 +101,7 @@ export default function AdminOrder() {
               </td>
               <td className="py-3 px-6 text-center">
               {edit === item.id ?  
-                <select onChange={(e)=> handleUpdate(e,order)}>
+                <select onChange={(e)=> handleUpdate(e,order, index)}>
                   <option value="pending">Pending</option>
                   <option value="dispatched">Dispatched</option>
                   <option value="delivered">Delivered</option>

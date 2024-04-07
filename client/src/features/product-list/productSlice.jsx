@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {PostProducts, fetchAllProducts, fetchProductsByquery, selectedProducts, updateProducts} from './productAPI';
+import {PostProducts, deleteProducts, fetchAllProducts, fetchProductsByquery, selectedProducts, updateProducts} from './productAPI';
 
 const initialState = {
   allProducts:[],
@@ -56,6 +56,15 @@ export const updateProductAsync = createAsyncThunk(
 
   }
 );
+export const deleteProductAsync = createAsyncThunk(
+  'product/deleteProduct',
+  async (id) => {
+    const response = await deleteProducts(id);
+    return response.data;
+
+
+  }
+);
 
 export const productSlice = createSlice({
   name: 'product',
@@ -105,6 +114,15 @@ export const productSlice = createSlice({
         state.status = 'idle';
         const index = state.products.findIndex((item)=> item.id == action.payload.id)
         state.products[index]= action.payload;
+      })
+      .addCase(deleteProductAsync.pending, (state, action) => {
+        state.status = 'idle';
+      })
+      .addCase(deleteProductAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        const index = state.products.findIndex((item)=> item.id == action.payload.id)
+        state.products.splice(index, 1);
+        state.allProducts.splice(index,1);
       });
   },
 });

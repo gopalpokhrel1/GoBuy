@@ -34,6 +34,7 @@ exports.fetchOrder = async(req,res)=>{
 
 exports.createOrder = async(req,res)=>{
     const data = req.body;
+  
     try{
         const data = await new Order(req.body);
         data.save().then(doc=> res.status(200).json(doc)).catch(err => res.status(500))

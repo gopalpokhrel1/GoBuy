@@ -48,6 +48,20 @@
   
     );
   }
+  export  function deleteProducts(id) {
+    
+    return new Promise( async (resolve) =>{
+      
+     const response = await fetch('http://localhost:8080/products/'+id, {
+      method:"DELETE",
+     })
+     const data = await response.json();
+  
+     resolve({data})
+    }
+  
+    );
+  }
   
   //Get all Product by id
   export  function selectedProducts(id) {

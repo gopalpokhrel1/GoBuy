@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { validUser } from '../../auth/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchedLoginUserAsync } from '../userSlice';
+import { fetchedLoginUserAsync, selectLoginUser } from '../userSlice';
 import { updateAddressAsync } from '../userSlice';
 import { useForm } from "react-hook-form"
 
@@ -22,7 +22,8 @@ export default function UserProfile() {
 
 
 
-  const loginUser = useSelector(validUser);
+  const user = useSelector(validUser);
+  const loginUser = useSelector(selectLoginUser);
 
   const handleEdit = (e, index) => {
       const address = loginUser.address[index];
@@ -48,7 +49,7 @@ export default function UserProfile() {
 
   }
   useEffect(()=>{
-    dispatch(fetchedLoginUserAsync(loginUser.id))
+    dispatch(fetchedLoginUserAsync(user.id))
 }, [handleRemove, edit])
 
   return (
