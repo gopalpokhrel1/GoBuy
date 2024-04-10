@@ -24,7 +24,7 @@ export default function UserProfile() {
 
   const user = useSelector(validUser);
   const loginUser = useSelector(selectLoginUser);
-
+  
   const handleEdit = (e, index) => {
       const address = loginUser.address[index];
       setEdit(address);
@@ -55,7 +55,7 @@ export default function UserProfile() {
   return (
     <div>
       <div className="mx-auto my-8 max-w-7xl px-4 sm:px-6 lg:px-8 bg-white">
-        <h2 className='text-3xl'>{loginUser.address.fullname}</h2>
+        <h2 className='text-3xl'>{loginUser.fullname}</h2>
         <p className='text-2xl'>Role:<span className='text-2xl text-blue-500'>{loginUser.role}</span></p>
         <div className="mt-8">
           <div className="flow-root">

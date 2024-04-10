@@ -17,7 +17,6 @@ exports.updateUser = async(req,res)=>{
     console.log(req.body);
     try{
         const {id} = req.params;
-        
         const data = await User.findByIdAndUpdate(id, req.body);
         if(!data){
             return res.status(404).json({message:"notfound"})

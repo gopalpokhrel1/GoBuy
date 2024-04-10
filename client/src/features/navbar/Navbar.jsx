@@ -28,7 +28,7 @@ export default function Navbar({ children }) {
     const user = useSelector(validUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+   console.log(user);
  const handleSignOut = ()=>{
      dispatch(logOutAsync())
     navigate('/login');
@@ -48,7 +48,7 @@ export default function Navbar({ children }) {
                                             <Link to='/'>
                                                 <img
                                                     className="h-8 w-8"
-                                                    src="...logo"
+                                                    src='../'
                                                     alt="GoBuy"
                                                 /></Link>
                                         </div>
@@ -97,7 +97,7 @@ export default function Navbar({ children }) {
                                                     <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                                         <span className="absolute -inset-1.5" />
                                                         <span className="sr-only">Open user menu</span>
-                                                        <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                                                        <img className="h-8 w-8 rounded-full" src={user.profileImage} alt="" />
                                                     </Menu.Button>
                                                 </div>
                                                 <Transition
@@ -178,7 +178,7 @@ export default function Navbar({ children }) {
                                 <div className="border-t border-gray-700 pb-3 pt-4">
                                     <div className="flex items-center px-5">
                                         <div className="flex-shrink-0">
-                                            <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
+                                            <img className="h-10 w-10 rounded-full" src={user.profileImage} alt="Hello" />
                                         </div>
                                         <div className="ml-3">
                                             <div className="text-base font-medium leading-none text-white">{user.name}</div>
