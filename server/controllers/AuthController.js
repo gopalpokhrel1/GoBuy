@@ -3,13 +3,14 @@ const bcrypt = require('bcrypt');
 
 const { generate_jwt } = require("../utils/generateJwt");
 const { sendMail } = require("../utils/sendMailRegister");
-const { uploadOnCloudinary } = require("../services/cloudinary");
+// const { uploadOnCloudinary } = require("../services/cloudinary");
 
 exports.createUser = async (req, res) => {
     const salt_round = process.env.SALT_ROUND;
+//TODO validate the email password....
 
     try {
-        const { email, password, country, street, province, city, zipcode, role } = req.body;
+        const { email, password, address ,role } = req.body;
         const existing_user = await User.findOne({ email: email });
 
         if (existing_user) {
@@ -17,25 +18,20 @@ exports.createUser = async (req, res) => {
         }
 
         const hash_pass = await bcrypt.hash(password, +salt_round);
-        const avatar = req.files?.profileImage[0]?.path;
+        // const avatar = req.files?.profileImage[0]?.path;
         
 
-        if(!avatar){
-            console.log("Image is not found");
-           }
+        // if(!avatar){
+        //     console.log("Image is not found");
+        //    }
 
-        const image = await uploadOnCloudinary(avatar);
-          console.log(image);
+        // const image = await uploadOnCloudinary(avatar);
         const user = await new User({
             email: email,
             password: hash_pass,
-            country,
-            street,
-            city,
-            province,
-            zipcode,
-            role:role,
-            profileImage:image.url
+            address,
+            role:role
+         
         })
 
         await user.save();

@@ -117,10 +117,10 @@ export default function ProductList() {
   const [sort, setSort] = useState({});
   const [page, setPage] = useState(1);
   const limit = 10;
-  const ProductCount = useSelector(allProducts);
+  const productsCount = useSelector(allProducts);
 
 
-  const totolItems = ProductCount.length;
+  const totolItems = productsCount.length;
 
 
   const handleFilter = (e, section, option) => {

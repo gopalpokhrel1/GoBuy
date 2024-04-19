@@ -26,6 +26,7 @@ const main = async()=>{
     }
     catch(error){
         console("Database is not connected");
+        process.exit(1);
     }
 }
 

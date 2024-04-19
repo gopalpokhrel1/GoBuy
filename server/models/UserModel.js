@@ -4,13 +4,8 @@ const {Schema} = require('mongoose');
 const userSchema = new Schema({
     email: {type:String, required:true, unique:true},
     password:{type:String, required:true},
-    country:{type:String},
-    street:{tyep:String},
-    city:{type:String},
-    province:{type:String},
-    zipcode:{type:Number},
+    address:{type:[Schema.Types.Mixed]},
     role:{type:String , default:"user"},
-    profileImage:{type:String},
     token:{type:String}
 })
 

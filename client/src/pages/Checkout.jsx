@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import Navbar from "../features/navbar/Navbar";
+
 import { useSelector, useDispatch } from 'react-redux';
 import {  useState } from 'react'
 import { useForm } from "react-hook-form"
@@ -72,14 +74,8 @@ export default function Checkout() {
         }
     }
     const handleFormSubmit = (formData) => {
-        if(!selectedAddress){
-          alert("Select the address");
-        }
-        else{
             dispatch(updateAddressAsync({ address: [...loginUser.address, formData], id: user.id }));
             reset();
-        }
-      
     };
 
     useEffect(() => {
@@ -91,6 +87,7 @@ export default function Checkout() {
 
             {!data.length && <Navigate to='/' replace={true} />}
             {order && <Navigate to={`/order-success/${order.id}`} replace={true} />}
+            <Navbar>
             {loginUser && 
             <div className="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
 
@@ -389,6 +386,7 @@ export default function Checkout() {
                 </div>
             </div>
 }
+            </Navbar>
         </> 
     )
 }

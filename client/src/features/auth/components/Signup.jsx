@@ -37,23 +37,20 @@ export default function Signup() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form noValidate className="space-y-6" onSubmit={handleSubmit((data) => {
-              const formData = new FormData();
-              formData.append('profileImage', data.profileImage[0]);
-  
-              // Append other form data
-              formData.append('fullname', data.fullname);
-              formData.append('email', data.email);
-              formData.append('password', data.password);
-              formData.append('role', data.role);
-              formData.append('country', data.country);
-              formData.append('street', data.street);
-              formData.append('province', data.province);
-              formData.append('city', data.city);
-              formData.append('zipcode', data.zipcode);
-  
-              dispatch(createUserAsync(formData));
-          })}>
+        <form noValidate className="space-y-6" onSubmit={handleSubmit((data) => {
+    
+    dispatch(createUserAsync({            email: data.email, password: data.password, address: [{
+      fullname: data.fullname,
+      email:data.email,
+      country: data.country,
+      street: data.street,
+      province:data.province,
+      city: data.city,
+      zipcode: data.zipcode
+
+    }], role: data.role}));
+})}>
+
             <div className="sm:col-span-3">
               <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
                 Full name
@@ -138,18 +135,6 @@ export default function Signup() {
               </select>
             </div>
 
-            <div className="sm:col-span-3">
-              <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
-                Profile Image
-              </label>
-              <div className="mt-2">
-                <input
-                  type="file"
-                  {...register('profileImage', { required: "Image is mandotory" })}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
 
             <div className="sm:col-span-3">
               <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">
