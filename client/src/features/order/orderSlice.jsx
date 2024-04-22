@@ -1,16 +1,25 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { deleteOrder, fetchAllOrders, orderItem, updateOrder } from './orderAPI';
+import { deleteOrder, fetchAllOrders, orderItem, orderItemUsingEpay, updateOrder } from './orderAPI';
 
 const initialState = {
   value: [],
   status: 'idle',
   orderContent:null,
+  ePayContent:null,
 };
 
 export const orderItemAsync = createAsyncThunk(
   'order/orderItem',
   async (order) => {
     const response = await orderItem(order);
+
+    return response.data;
+  }
+);
+export const orderItemUsingEpayAsync = createAsyncThunk(
+  'order/orderItemUsingEpay',
+  async (order) => {
+    const response = await orderItemUsingEpay(order);
 
     return response.data;
   }
@@ -62,6 +71,15 @@ export const orderSlice = createSlice({
         state.orderContent = action.payload;
       
       })
+      .addCase(orderItemUsingEpayAsync.pending, (state, action) => {
+        state.status = 'loading';
+      
+      })
+      .addCase(orderItemUsingEpayAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.ePayContent = action.payload;
+      
+      })
       .addCase(fetchOrderAsync.pending, (state, action) => {
         state.status = 'idle';
 
@@ -96,6 +114,7 @@ export const { resetOrder } = orderSlice.actions;
 
 export const selectOrder = (state) => state.order.value;
 export const orderValue =(state) =>  state.order.orderContent;
+export const ePayValue = (state)=> state.order.ePayContent;
 
 
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import Navbar from "../features/navbar/Navbar";
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,8 +20,26 @@ import {
 
 import { Link, Navigate } from 'react-router-dom';
 
-import { orderItemAsync, orderValue } from '../features/order/orderSlice';
+import { orderItemAsync, orderItemUsingEpayAsync, orderValue, ePayValue } from '../features/order/orderSlice';
 
+
+function callEsewa(formdata) {
+    console.log(formdata);
+    const path = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
+    let form = document.createElement("form");
+    form.setAttribute("method", "POST");
+    form.setAttribute("action", path);
+
+    for (let key in formdata) {
+        let hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", key);
+        hiddenField.setAttribute("value", formdata[key]);
+        form.appendChild(hiddenField);
+    }
+    document.body.appendChild(form);
+    form.submit();
+}
 
 
 export default function Checkout() {
@@ -31,10 +49,12 @@ export default function Checkout() {
     const order = useSelector(orderValue);
     const loginUser = useSelector(selectLoginUser);
     const dispatch = useDispatch();
+    const epay = useSelector(ePayValue);
+
+
+
   
-    console.log(user);
-
-
+  
     const {
         register,
         handleSubmit,
@@ -73,13 +93,27 @@ export default function Checkout() {
             dispatch(orderItemAsync(order));
         }
     }
+        
+   
+    const handleEpay = () => {
+    
+        const order = { user:loginUser.id, data, selectedAddress, payment, totalPrice, totalQuantity, status: 'pending' };
+        
+            dispatch(orderItemUsingEpayAsync(order));
+
+    }
     const handleFormSubmit = (formData) => {
             dispatch(updateAddressAsync({ address: [...loginUser.address, formData], id: user.id }));
             reset();
     };
 
+    if(epay!== null){
+        callEsewa(epay);
+     }
+
     useEffect(() => {
         dispatch(fetchedLoginUserAsync(user.id));
+       
       });
 
     return (
@@ -357,12 +391,20 @@ export default function Checkout() {
                                     <p>{totalQuantity}</p>
                                 </div>
                                 <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                                <div className="mt-6">
+                                <div className="mt-2">
                                     <button
                                         onClick={handleOrder}
                                         className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                                     >
                                         Order Now
+                                    </button>
+                                </div>
+                                <div className="mt-6">
+                                    <button
+                                        onClick={handleEpay}
+                                        className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                                    >
+                                        e-pay
                                     </button>
                                 </div>
                                 <div className="mt-6 flex justify-center text-center text-sm text-gray-500">

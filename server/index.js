@@ -14,9 +14,10 @@ const port = process.env.PORT_NUMBER;
 const databaseUrl = process.env.DATABASE_URL;
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use(cors());
+
 
 //connection  with database
 const main = async()=>{

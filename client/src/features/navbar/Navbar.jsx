@@ -28,7 +28,6 @@ export default function Navbar({ children }) {
     const user = useSelector(validUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-   console.log(user);
  const handleSignOut = ()=>{
      dispatch(logOutAsync())
     navigate('/login');
