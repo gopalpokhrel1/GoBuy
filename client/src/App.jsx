@@ -24,6 +24,7 @@ import AdminHome from './pages/AdminHome';
 import AdminProductDetailsPage from './pages/AdminProductDetailsPage';
 import AdminProductFormPage from './pages/AdminProductFormPage';
 import AdminOrderPage from './pages/AdminOrderPage';
+import PaymentSuccess from './pages/PaymentSuccess';
 
 
 const router = createBrowserRouter([
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: "/checkout",
     element: <Protected><Checkout/></Protected>,
+  },
+  {
+    path: "/payment",
+    element: <Protected><PaymentSuccess/></Protected>,
   },
   {
     path: "/productdetails/:id",

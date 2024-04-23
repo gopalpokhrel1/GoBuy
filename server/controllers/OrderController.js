@@ -2,6 +2,7 @@ const { Order } = require("../models/OrderModel");
 const { orderMail } = require("../utils/orderMail");
 const { orderStatus } = require("../utils/orderStatusMail");
 const { createSignature } = require('../services/esewa');
+const { callKhalti } = require("../services/khalti");
 
 
 exports.fetchOrder = async (req, res) => {
@@ -51,29 +52,41 @@ exports.ePayment = async (req, res) => {
 
     try {
         const data = await Order.create(req.body);
+        //   const signature = await createSignature(
+        //     `total_amount = ${data.totalPrice},  transaction_uuid=${data.id}, product_code=Epaytest`
+
+        //  )
+
+        //  const formdata = {
+        //     "amount": data.totalPrice,
+        //     "failure_url": "https://google.com",
+        //     "product_delivery_charge": "0",
+        //     "product_service_charge": "0",
+        //     "product_code": "EPAYTEST",
+        //     "signature":signature ,
+        //     "signed_field_names": "total_amount,transaction_uuid,product_code",
+        //     "success_url": "https://esewa.com.np",
+        //     "tax_amount": "0",
+        //     "total_amount": data.totalPrice,
+        //     "transaction_uuid": data.id
+        //  } 
 
 
-          const signature = await createSignature(
-            `total_amount = ${data.totalPrice},  transaction_uuid=${data.id}, product_code=Epaytest`
+        const formData = {
+            return_url: "http://localhost:8080/orders/callback",
+            website_url: "http://localhost:8080",
+            amount: data.totalPrice * 100,
+            purchase_order_id: data.id,
+            purchase_order_name: "test",
+            customer_info: {
+                "name": "test Bahadur",
+                "email": "example@gmail.com",
+                "phone": "9800000123"
+            },
+          };
 
-         )
-
-         const formdata = {
-            "amount": data.totalPrice,
-            "failure_url": "https://google.com",
-            "product_delivery_charge": "0",
-            "product_service_charge": "0",
-            "product_code": "EPAYTEST",
-            "signature":signature ,
-            "signed_field_names": "total_amount,transaction_uuid,product_code",
-            "success_url": "https://esewa.com.np",
-            "tax_amount": "0",
-            "total_amount": data.totalPrice,
-            "transaction_uuid": data.id
-         } 
-
-         console.log(formdata);
-         res.status(200).json(formdata);
+         callKhalti(formData, req, res);
+        //  res.status(200).json(formdata);
          
     }
     catch (error) {
@@ -89,6 +102,21 @@ exports.updateOrder = async (req, res) => {
     res.status(200).json(data);
     orderStatus(file);
 }
+
+exports.updateOrderAfterPayment = async (req, res) => {
+    console.log(req.transaction_uuid);
+    try {
+      const order = await Order.findById(req.transaction_uuid);
+      console.log(order);
+      order.payment = "paid";
+    //   order.transaction_code = req.transaction_code;
+  
+      await order.save(order);
+      res.redirect("http://localhost:5173/payment");
+    } catch (err) {
+      return res.status(400).json({ error: err?.message || "No Orders found" });
+    }
+  };
 
 exports.deleteOrder = async (req, res) => {
     const { id } = req.params;

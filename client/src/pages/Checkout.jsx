@@ -23,23 +23,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { orderItemAsync, orderItemUsingEpayAsync, orderValue, ePayValue } from '../features/order/orderSlice';
 
 
-function callEsewa(formdata) {
-    console.log(formdata);
-    const path = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
-    let form = document.createElement("form");
-    form.setAttribute("method", "POST");
-    form.setAttribute("action", path);
 
-    for (let key in formdata) {
-        let hiddenField = document.createElement("input");
-        hiddenField.setAttribute("type", "hidden");
-        hiddenField.setAttribute("name", key);
-        hiddenField.setAttribute("value", formdata[key]);
-        form.appendChild(hiddenField);
-    }
-    document.body.appendChild(form);
-    form.submit();
-}
 
 
 export default function Checkout() {
@@ -94,27 +78,48 @@ export default function Checkout() {
         }
     }
         
-   
-    const handleEpay = () => {
-    
-        const order = { user:loginUser.id, data, selectedAddress, payment, totalPrice, totalQuantity, status: 'pending' };
-        
-            dispatch(orderItemUsingEpayAsync(order));
 
-    }
     const handleFormSubmit = (formData) => {
             dispatch(updateAddressAsync({ address: [...loginUser.address, formData], id: user.id }));
             reset();
     };
 
-    if(epay!== null){
-        callEsewa(epay);
-     }
+
 
     useEffect(() => {
         dispatch(fetchedLoginUserAsync(user.id));
        
       });
+
+      function handleEpay() {
+        if(!selectedAddress){
+            return alert('select address');
+        }
+ 
+        const order = { user:loginUser.id, data, selectedAddress, payment, totalPrice, totalQuantity, status: 'pending' };
+        
+        dispatch(orderItemUsingEpayAsync(order));
+        
+
+        if(epay){
+           window.location.href = epay.payment_url;
+        }
+   
+       // const path = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
+       // let form = document.createElement("form");
+       // form.setAttribute("method", "POST");
+       // form.setAttribute("action", path);
+   
+       // for (let key in formdata) {
+       //     let hiddenField = document.createElement("input");
+       //     hiddenField.setAttribute("type", "hidden");
+       //     hiddenField.setAttribute("name", key);
+       //     hiddenField.setAttribute("value", formdata[key]);
+       //     form.appendChild(hiddenField);
+       // }
+       // document.body.appendChild(form);
+       // form.submit();
+   }
 
     return (
         <>
