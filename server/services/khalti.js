@@ -49,16 +49,11 @@ exports.handleKhaltiCallback = async (req, res, next) => {
       { pidx },
       { headers }
     );
-
-    console.log(response.data);
     if (response.data.status !== "Completed") {
       return res.status(400).json({ error: "Payment not completed" });
     }
-
-    console.log(purchase_order_id, pidx);
-    req.transaction_uuid = purchase_order_id;
-    req.transaction_code = pidx;
-    next();
+    res.redirect(`http://localhost:5173/order-success/${transaction_id}`);
+  
   } catch (err) {
     console.log(err);
     return res

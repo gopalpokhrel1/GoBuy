@@ -99,11 +99,13 @@ export default function Checkout() {
         const order = { user:loginUser.id, data, selectedAddress, payment, totalPrice, totalQuantity, status: 'pending' };
         
         dispatch(orderItemUsingEpayAsync(order));
+
         
 
         if(epay){
            window.location.href = epay.payment_url;
         }
+
    
        // const path = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
        // let form = document.createElement("form");

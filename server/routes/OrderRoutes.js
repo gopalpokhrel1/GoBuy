@@ -5,7 +5,7 @@ const OrderRouter = express.Router();
 
 OrderRouter
 .get('/', fetchOrder)
-.get('/callback', handleKhaltiCallback, updateOrderAfterPayment)
+.get('/callback', handleKhaltiCallback)
 .post('/', createOrder)
 .post('/payment', ePayment)
 .patch('/:id', updateOrder)
