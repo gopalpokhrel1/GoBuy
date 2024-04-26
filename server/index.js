@@ -10,7 +10,7 @@ const OrderRouter = require('./routes/OrderRoutes');
 
 dotenv.config();
 
-const port = process.env.PORT_NUMBER;
+const port = process.env.BASE_URL || process.env.PORT_NUMBER;
 const databaseUrl = process.env.DATABASE_URL;
 
 const app = express();

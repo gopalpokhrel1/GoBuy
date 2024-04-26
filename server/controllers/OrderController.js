@@ -16,7 +16,7 @@ exports.fetchOrder = async (req, res) => {
         }
 
         catch (error) {
-
+            return res.status(500).json({message:"Internal server error"});
         }
 
     }
@@ -35,9 +35,10 @@ exports.fetchOrder = async (req, res) => {
 
 exports.createOrder = async (req, res) => {
     const data = req.body;
-
-
     try {
+        if(!data){
+            res.status(400).json({message:"data are not given"});
+        }
         const data = await new Order(req.body);
         data.save().then(doc => res.status(200).json(doc)).catch(err => res.status(500))
         orderMail(data);
@@ -45,7 +46,7 @@ exports.createOrder = async (req, res) => {
 
     }
     catch (error) {
-
+        return res.status(500).json({message:"Internal server error"});
     }
 }
 exports.ePayment = async (req, res) => {
@@ -90,7 +91,7 @@ exports.ePayment = async (req, res) => {
          
     }
     catch (error) {
-
+        return res.status(500).json({message:"Internal server error"});
     }
 }
 
