@@ -105,8 +105,6 @@ export default function Checkout() {
         if(epay){
            window.location.href = epay.payment_url;
         }
-
-   
        // const path = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
        // let form = document.createElement("form");
        // form.setAttribute("method", "POST");
@@ -398,7 +396,8 @@ export default function Checkout() {
                                     <p>{totalQuantity}</p>
                                 </div>
                                 <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                                <div className="mt-2">
+                            <div className='flex gap-6'>
+                            <div className="mt-2">
                                     <button
                                         onClick={handleOrder}
                                         className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
@@ -406,14 +405,15 @@ export default function Checkout() {
                                         Order Now
                                     </button>
                                 </div>
-                                <div className="mt-6">
+                                <div className="mt-2">
                                     <button
                                         onClick={handleEpay}
-                                        className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                                        className="flex items-center justify-center rounded-md border border-transparent bg-[#571c69] px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-[#9a4ab2]"
                                     >
                                         e-pay
                                     </button>
                                 </div>
+                            </div>
                                 <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                                     <p>
                                         or{' '}

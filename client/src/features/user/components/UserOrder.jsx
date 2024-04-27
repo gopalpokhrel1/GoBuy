@@ -24,7 +24,7 @@ export default function UserOrder() {
             return(
                     
               <div className="mx-auto my-8 max-w-7xl px-4 sm:px-6 lg:px-8 bg-white">
-              <h2 className='text-4xl'>Cart</h2>
+              <h2 className='text-4xl'>Orders</h2>
               <div className="mt-8">
                 <div className="flow-root">
                   <ul role="list" className="-my-6 divide-y divide-gray-200">

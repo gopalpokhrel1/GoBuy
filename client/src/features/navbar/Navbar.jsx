@@ -148,24 +148,23 @@ export default function Navbar({ children }) {
                         {/* Mobile menu */}
                         <Disclosure.Panel className="md:hidden">
                             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                                {navigation.map((item) => (
-                                    <Link
-                                        key={item.name}
-                                        to={item.href}
-                                        className={classNames(
-                                            item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                            'block rounded-md py-2 px-3 text-base font-medium'
-                                        )}
-                                        aria-current={item.current ? 'page' : undefined}
-                                    >
-                                        {item.name}
-                                    </Link>
-                                ))}
+                            {navigation.map((item) => item[user.role] && (
+                                                <Link
+                                                    key={item.name}
+                                                    to={item.href}
+                                                    className={classNames(
+                                                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                        'rounded-md px-3 py-2 text-sm font-medium'
+                                                    )}
+                                                    aria-current={item.current ? 'page' : undefined}
+                                                >
+                                                    {item.name}
+                                                </Link>))}
                             </div>
                             <div className="pt-4 pb-3 border-t border-gray-700">
                                 <div className="flex items-center px-5">
                                     <div className="flex-shrink-0">
-                                        <img className="h-10 w-10 rounded-full" src={user.profileImage} alt="" />
+                                        <img className="h-10 w-10 rounded-full" src='https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg' alt="logo" />
                                     </div>
                                     <div className="ml-3">
                                         <div className="text-base font-medium leading-none text-white">{user.name}</div>
@@ -178,8 +177,8 @@ export default function Navbar({ children }) {
                                             key={item.name}
                                             to={item.href}
                                             className={classNames(
-                                                'block px-4 py-2 text-sm text-gray-700',
-                                                item.signout && 'bg-gray-100'
+                                                'inline px-4 py-2 text-sm text-white ',
+                                                item.signout && 'bg-red-800 rounded-lg'
                                             )}
                                             onClick={item.signout ? handleSignOut : undefined}
                                         >

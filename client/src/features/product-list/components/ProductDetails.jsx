@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
-import { RadioGroup } from '@headlessui/react'
 import { selectSpecificProducts, selectedProductsAsync } from '../productSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -126,6 +125,7 @@ export default function Example() {
                   <p className="text-base text-gray-900">{product.description}</p>
                 </div>
               </div>
+
   
               <div className="mt-10">
                 <h2 className="text-sm font-medium text-gray-900">Details</h2>
