@@ -8,7 +8,7 @@ const AuthRouter = require('./routes/AuthRoutes');
 const CartRouter = require('./routes/CartRoutes');
 const OrderRouter = require('./routes/OrderRoutes');
 
-dotenv.config();
+dotenv.config({path:"./.env"});
 
 const port = process.env.BASE_URL || process.env.PORT_NUMBER;
 const databaseUrl = process.env.DATABASE_URL;
@@ -32,6 +32,10 @@ const main = async()=>{
 }
 
 main();
+
+app.get('/',(req,res)=>{
+    res.send("Hello from hosted server!!")
+})
 
 app.use('/products', ProductRouter);
 app.use('/auth', AuthRouter);
