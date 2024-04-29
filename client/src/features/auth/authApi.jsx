@@ -2,7 +2,7 @@
 export  function createUser(userData) {
   console.log(userData);
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/auth/signup', {method:"POST",
+     const response = await fetch('https://gobuy-07tr.onrender.com/auth/signup', {method:"POST",
     body:JSON.stringify(userData),
     headers:{
       'content-type':'application/json'
@@ -20,7 +20,7 @@ export  function createUser(userData) {
   export  function userCheck(userData) {
   
     return new Promise( async (resolve, reject) =>{
-     const response = await fetch('http://localhost:8080/auth/login', {
+     const response = await fetch('https://gobuy-07tr.onrender.com/auth/login', {
       method:"POST",
       body: JSON.stringify(userData),
       headers:{'content-type': 'application/json'}
@@ -42,7 +42,7 @@ export  function createUser(userData) {
   //update address of user
   export  function addUserCheckout(userData) {
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/users/'+userData.id, {method:"PATCH",
+     const response = await fetch('https://gobuy-07tr.onrender.com/users/'+userData.id, {method:"PATCH",
     body:JSON.stringify(userData),
     headers:{'Content-type': 'application/json'}
     })

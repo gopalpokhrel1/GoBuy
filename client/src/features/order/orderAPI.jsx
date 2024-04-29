@@ -1,7 +1,7 @@
 
 export  function orderItem(order) {
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/orders', {method:"POST",
+     const response = await fetch('https://gobuy-07tr.onrender.com/orders', {method:"POST",
     body:JSON.stringify(order),
     headers:{'content-type': 'application/json'}
     })
@@ -14,7 +14,7 @@ export  function orderItem(order) {
   }
   export function orderItemUsingEpay(order) {
     return new Promise(async (resolve) => {
-        const response = await fetch('http://localhost:8080/orders/payment', {
+        const response = await fetch('https://gobuy-07tr.onrender.com/orders/payment', {
             method: "POST",
             body: JSON.stringify(order),
             headers: { 
@@ -39,7 +39,7 @@ export  function orderItem(order) {
     console.log(queryString);
   
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/orders?'+queryString)
+     const response = await fetch('https://gobuy-07tr.onrender.com/orders?'+queryString)
      const data = await response.json();
      resolve({data})
     }
@@ -50,7 +50,7 @@ export  function orderItem(order) {
   
   export  function updateOrder(order) {
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/orders/'+ order.id, {method:"PATCH",
+     const response = await fetch('https://gobuy-07tr.onrender.com/orders/'+ order.id, {method:"PATCH",
     body:JSON.stringify(order),
     headers:{'content-type': 'application/json'}
     })
@@ -64,7 +64,7 @@ export  function orderItem(order) {
   export  function deleteOrder(id) {
     
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/orders/'+ id, {method:"DELETE"
+     const response = await fetch('https://gobuy-07tr.onrender.com/orders/'+ id, {method:"DELETE"
     })
      const data = await response.json();
      resolve({data})

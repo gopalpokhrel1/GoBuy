@@ -1,7 +1,7 @@
  // Get all Products
  export  function fetchAllProducts(token) {
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/products', {
+     const response = await fetch('https://gobuy-07tr.onrender.com/products', {
       method:"GET",
       headers:{
         "Authorization":`Bearer ${token}`,
@@ -19,7 +19,7 @@
     
     return new Promise( async (resolve) =>{
       
-     const response = await fetch('http://localhost:8080/products', {
+     const response = await fetch('https://gobuy-07tr.onrender.com/products', {
       method:"POST",
       body : JSON.stringify(value),
       headers: {'Content-Type': 'application/json'}
@@ -34,7 +34,7 @@
     
     return new Promise( async (resolve) =>{
       
-     const response = await fetch('http://localhost:8080/products/'+ value.id, {
+     const response = await fetch('https://gobuy-07tr.onrender.com/products/'+ value.id, {
       method:"PATCH",
       body : JSON.stringify(value),
       headers: {'Content-Type': 'application/json'}
@@ -50,7 +50,7 @@
     
     return new Promise( async (resolve) =>{
       
-     const response = await fetch('http://localhost:8080/products/'+id, {
+     const response = await fetch('https://gobuy-07tr.onrender.com/products/'+id, {
       method:"DELETE",
      })
      const data = await response.json();
@@ -64,7 +64,7 @@
   //Get all Product by id
   export  function selectedProducts(id) {
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/products/'+id)
+     const response = await fetch('https://gobuy-07tr.onrender.com/products/'+id)
      const data = await response.json();
      resolve({data})
     }
@@ -99,7 +99,7 @@
     }
   
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/products?'+queryString, {
+     const response = await fetch('https://gobuy-07tr.onrender.com/products?'+queryString, {
       method:"GET",
       headers:{
         "Authorization":`Bearer ${token}`,

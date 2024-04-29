@@ -1,7 +1,7 @@
 export  function fetchUserOrder(userId) {
 
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/orders/?user='+userId)
+     const response = await fetch('https://gobuy-07tr.onrender.com/orders/?user='+userId)
      const data = await response.json();
      resolve({data})
     }
@@ -12,7 +12,7 @@ export  function fetchUserOrder(userId) {
   
   export  function fetchLogginedUser(userId) {
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/users/'+userId)
+     const response = await fetch('https://gobuy-07tr.onrender.com/users/'+userId)
      const data = await response.json();
      resolve({data})
    
@@ -24,7 +24,7 @@ export  function fetchUserOrder(userId) {
   export  function updateAddress(userData) {
 
     return new Promise( async (resolve) =>{
-     const response = await fetch('http://localhost:8080/users/'+userData.id, {method:"PATCH",
+     const response = await fetch('https://gobuy-07tr.onrender.com/users/'+userData.id, {method:"PATCH",
     body:JSON.stringify(userData),
     headers:{'Content-type': 'application/json'}
     })
