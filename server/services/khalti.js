@@ -52,7 +52,7 @@ exports.handleKhaltiCallback = async (req, res, next) => {
     if (response.data.status !== "Completed") {
       return res.status(400).json({ error: "Payment not completed" });
     }
-    res.redirect(`http://localhost:5173/order-success/${transaction_id}`);
+    res.redirect(`https://gobuy.netlify.app/order-success/${transaction_id}`);
   
   } catch (err) {
     console.log(err);

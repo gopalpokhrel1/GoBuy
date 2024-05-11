@@ -18,13 +18,14 @@ export  function createUser(userData) {
   
   //check the user during login
   export  function userCheck(userData) {
-  
     return new Promise( async (resolve, reject) =>{
      const response = await fetch('https://gobuy-07tr.onrender.com/auth/login', {
       method:"POST",
       body: JSON.stringify(userData),
       headers:{'content-type': 'application/json'}
      });
+
+     console.log(response);
       if(response.ok){
         let data = await response.json();
         resolve({data}) 
