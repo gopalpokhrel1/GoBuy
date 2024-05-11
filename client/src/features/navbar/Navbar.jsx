@@ -45,7 +45,7 @@ export default function Navbar({ children }) {
                                         <Link to='/'>
                                             <img
                                                 className="h-16 w-16"
-                                                src='/public/logo/logo.png'
+                                                src='../../../src/assets/logo/logo.png'
                                                 alt="GoBuy"
                                             />
                                         </Link>

@@ -74,8 +74,8 @@ exports.ePayment = async (req, res) => {
 
 
         const formData = {
-            return_url: "http://localhost:8080/orders/callback",
-            website_url: "http://localhost:8080",
+            return_url: "https://gobuy-07tr.onrender.com/orders/callback",
+            website_url: "https://gobuy.netlify.app/",
             amount: data.totalPrice * 100,
             purchase_order_id: data.id,
             purchase_order_name: "test",
