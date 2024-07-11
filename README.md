@@ -8,6 +8,7 @@ Login_Credentials= randomprasad@gmail.com
 password:Qwerty!1
 
 In Payement Method:
+*use khalti wallet for payment *
 Id : 9800000001
 password:1111
 
