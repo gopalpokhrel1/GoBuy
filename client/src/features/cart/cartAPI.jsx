@@ -17,6 +17,7 @@
     return new Promise( async (resolve) =>{
      const response = await fetch('https://gobuy-07tr.onrender.com/carts?user='+id)
      const data = await response.json();
+     console.log(data);
      resolve({data})
     }
   

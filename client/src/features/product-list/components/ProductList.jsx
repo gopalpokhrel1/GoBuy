@@ -38,11 +38,7 @@ const filters = [
       },
       { value: 'Infinix', label: 'Infinix', checked: false },
       { value: 'HP Pavilion', label: 'HP Pavilion', checked: false },
-      {
-        value: 'Impression of Acqua Di Gio',
-        label: 'Impression of Acqua Di Gio',
-        checked: false
-      },
+      
       { value: 'Royal_Mirage', label: 'Royal_Mirage', checked: false },
       {
         value: 'Fog Scent Xpressio',
@@ -53,31 +49,8 @@ const filters = [
       { value: 'Lord - Al-Rehab', label: 'Lord  AlRehab', checked: false },
       { value: "L'Oreal Paris", label: "L'Oreal Paris", checked: false },
       { value: 'Hemani Tea', label: 'Hemani Tea', checked: false },
-      { value: 'Dermive', label: 'Dermive', checked: false },
-      {
-        value: 'ROREC White Rice',
-        label: 'ROREC White Rice',
-        checked: false
-      },
-      { value: 'Fair & Clear', label: 'Fair & Clear', checked: false },
-      { value: 'Saaf & Khaas', label: 'Saaf & Khaas', checked: false },
-      {
-        value: 'Bake Parlor Big',
-        label: 'Bake Parlor Big',
-        checked: false
-      },
-      {
-        value: 'Baking Food Items',
-        label: 'Baking Food Items',
-        checked: false
-      },
-      { value: 'fauji', label: 'fauji', checked: false },
-      { value: 'Dry Rose', label: 'Dry Rose', checked: false },
-      { value: 'Boho Decor', label: 'Boho Decor', checked: false },
-      { value: 'Flying Wooden', label: 'Flying Wooden', checked: false },
-      { value: 'LED Lights', label: 'LED Lights', checked: false },
-      { value: 'luxury palace', label: 'luxury palace', checked: false },
-      { value: 'Golden', label: 'Golden', checked: false }
+      { value: 'Dermive', label: 'Dermive', checked: false }
+    
     ],
   },
   {
@@ -88,8 +61,7 @@ const filters = [
       { value: 'laptops', label: 'laptops', checked: false },
       { value: 'fragrances', label: 'fragrances', checked: false },
       { value: 'skincare', label: 'skincare', checked: false },
-      { value: 'groceries', label: 'groceries', checked: false },
-      { value: 'home-decoration', label: 'homedecoration', checked: false },
+      { value: 'groceries', label: 'groceries', checked: false }
     ],
   }
 ]

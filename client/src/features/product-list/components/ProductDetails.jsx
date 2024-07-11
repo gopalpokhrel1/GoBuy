@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { selectSpecificProducts, selectedProductsAsync } from '../productSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { CartById, addToCartAsync, fetchedUserByIdAsync } from '../../cart/cartSlice'
+import { useNavigate, useParams } from 'react-router-dom'
+import { addToCartAsync, fetchedUserByIdAsync } from '../../cart/cartSlice'
 import { validUser } from '../../auth/authSlice'
+import Navbar from '../../navbar/Navbar'
 
 
 const reviews = { href: '#', average: 4, totalCount: 117 }
@@ -28,18 +29,23 @@ export default function Example() {
 
   const handleCart = async () => {
     try {
+     
       await dispatch(addToCartAsync({ product:product.id, quantity: 1, user: user.id }));
-      await dispatch(fetchedUserByIdAsync(user.id));
+      await dispatch(fetchedUserByIdAsync(user.id))
+      window.scrollTo({top:0, behavior:'smooth'})
   
     } catch (error) {
      alert("Waiting");
     }
+  
   };
   return (
     <>
     
        {product && (
-        <div className="bg-white">
+       <>
+       <Navbar/>
+        <div className="bg-white p-10">
         <div className="pt-6">
           <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
             <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
@@ -138,6 +144,7 @@ export default function Example() {
           </div>
         </div>
       </div>
+      </>
        )
               } 
 

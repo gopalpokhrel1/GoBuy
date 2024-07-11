@@ -22,7 +22,8 @@
      const response = await fetch('https://gobuy-07tr.onrender.com/products', {
       method:"POST",
       body : JSON.stringify(value),
-      headers: {'Content-Type': 'application/json'}
+      headers: {'Content-Type': 'application/json'
+      }
      })
      const data = await response.json();
      resolve({data})

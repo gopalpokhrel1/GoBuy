@@ -27,7 +27,6 @@ export default function Navbar({ children }) {
     const user = useSelector(validUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const handleSignOut = () => {
         dispatch(logOutAsync())
         navigate('/login');
@@ -45,7 +44,7 @@ export default function Navbar({ children }) {
                                         <Link to='/'>
                                             <img
                                                 className="h-16 w-16"
-                                                src='../../../src/assets/logo/logo.png'
+                                                src='/logo.png'
                                                 alt="GoBuy"
                                             />
                                         </Link>

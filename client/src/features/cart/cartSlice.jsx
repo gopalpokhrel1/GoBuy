@@ -37,7 +37,7 @@ export const updateItemAsync = createAsyncThunk(
 export const deleteItemAsync = createAsyncThunk(
   'cart/deleteItemAsync',
   async (id) => {
-  console.log(id);
+
     const response = await deleteItem(id);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
